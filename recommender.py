@@ -23,11 +23,11 @@ def display_output(output):
 
 
 if __name__ == "__main__":
-    constraints = {"vcpu": {"min": 4, "max": 16}}
+    constraints = {"vcpu": {"min": 4, "max": 64}}
 
     instance_df = get_list_of_instances(constraints)
 
-    required_resources = {"vcpu": 17, "memory": 26}
+    required_resources = {"vcpu": 17, "memory": 86}
 
     output = best_reco(required_resources, instance_df)
     display_output(output)
