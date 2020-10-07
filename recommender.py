@@ -19,7 +19,7 @@ def best_reco(required_resources, instance_df):
 
 
 def display_output(output):
-    print(output)
+    print(output[(output.units > 0)])
 
 
 if __name__ == "__main__":
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     instance_df = get_list_of_instances(constraints)
 
-    required_resources = {"vcpu": 200, "mem": 500}
+    required_resources = {"vcpu": 17, "memory": 26}
 
     output = best_reco(required_resources, instance_df)
     display_output(output)
