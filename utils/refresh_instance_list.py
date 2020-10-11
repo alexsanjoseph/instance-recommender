@@ -20,13 +20,14 @@ def build_regional_pricing(region):
         try:
             final_list.append({
                     "name": instance['instance_type'],
-                    "mem": instance['memory'],
-                    "vcpu": instance["vCPU"],
-                    "price": instance['pricing'][region]['linux']['ondemand']
+                    "memory": instance['memory'],
+                    "vcpus": instance["vCPU"],
+                    "price": instance['pricing'][region]['linux']['ondemand'],
+                    "arch": instance['arch'][0]
                 })
         except KeyError as e:
             print("WARNING  Cannot find {0} in region {1}".format(instance["instance_type"], region))
-    with open('regions/{}'.format(region), 'w+') as region_file:
+    with open('instance_recommender/static/regions/{}'.format(region), 'w+') as region_file:
         region_file.write(json.dumps(final_list))
 
 

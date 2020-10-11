@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+import instance_recommender.cli_main
+

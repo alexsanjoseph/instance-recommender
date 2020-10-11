@@ -1,17 +1,17 @@
 import pandas as pd
-# from recommender import give_best_recommendation
-from recommender import best_reco
+from instance_recommender.recommender import best_reco
+from unittest import TestCase
 
 
-class TestRecommender:
-    def test__case1(self):
+class TestRecommender(TestCase):
+    def test_case1(self):
 
         required_resources = {'vcpu': 17, 'memory': 26}
 
         instance_df = pd.DataFrame({
             'name': ['m5', 'c5', 'r5'],
             'vcpu': [2, 2, 2],
-            'mem': [8, 4, 16],
+            'memory': [8, 4, 16],
             'price': [96, 85, 126]
         })
 
@@ -24,14 +24,14 @@ class TestRecommender:
 
         assert actual.equals(expected)
 
-    def test__case2(self):
+    def test_case2(self):
 
         required_resources = {'vcpu': 17, 'memory': 56}
 
         instance_df = pd.DataFrame({
             'name': ['m5', 'c5', 'r5'],
             'vcpu': [2, 2, 2],
-            'mem': [8, 4, 16],
+            'memory': [8, 4, 16],
             'price': [96, 85, 126]
         })
 
