@@ -1,6 +1,5 @@
 #!/bin/python3
 import argparse
-import math
 from .recommender import best_reco
 from .instance_list import get_list_of_instances
 

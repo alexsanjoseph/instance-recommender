@@ -1,18 +1,29 @@
-# from
 
-from instance_recommender.instance_list import get_list_of_instances
-from scipy.optimize import linprog
-import numpy as np
 import pandas as pd
+from pulp import *
 
+def remove_prefix(text, prefix):
+    if text.startswith(prefix):
+        return text[len(prefix):]
+    return text
 
 def best_reco(required_resources, instance_df):
-    A = -np.array(instance_df.loc[:, ['vcpus', 'memory']]).T
-    c = np.array(instance_df.loc[:, ['price']])
-    b = -np.array([required_resources[x] for x in ['vcpus', 'memory']])
-    res = linprog(c, A_ub=A, b_ub=b)
+    prob = LpProblem("InstanceRecommender", LpMinimize)
 
-    return pd.DataFrame({
-        'name': instance_df['name'],
-        'units': np.ceil(np.round(res.x, 2)).astype(int)
-    })
+    instances = instance_df['name'].values
+    instance_dict = instance_df.set_index('name').T.to_dict()
+    instance_vars = LpVariable.dicts("Instance", instances, lowBound=0, cat='Integer')
+
+    prob += lpSum([instance_dict[i]['price'] * instance_vars[i] for i in instances])
+    prob += lpSum([instance_dict[i]['vcpus'] * instance_vars[i] for i in instances]) >= required_resources['vcpus']
+    prob += lpSum([instance_dict[i]['memory'] * instance_vars[i] for i in instances]) >= required_resources['memory']
+
+    prob.solve()
+    print("Status:", LpStatus[prob.status])
+    best_reco = pd.DataFrame([
+        {'name': remove_prefix(v.name, "Instance_"), 'units': v.varValue}
+        for v in prob.variables() if v.varValue > 0]
+    )
+
+    best_reco = best_reco.merge(instance_df)
+    return best_reco

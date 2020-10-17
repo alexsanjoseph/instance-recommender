@@ -30,5 +30,6 @@ def get_list_of_instances(constraints):
         for burstable_instance_type in ['t4', 't3', 't2']:
             df = df[~df.name.str.startswith(burstable_instance_type)]
     df = df[df.arch == constraints['arch']]
+    df['price'] = df['price'].astype(float)
     return df
 
