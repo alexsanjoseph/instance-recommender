@@ -1,6 +1,6 @@
 import os
 import requests
-
+import copy
 import json
 import boto3
 from botocore import UNSIGNED
@@ -12,22 +12,23 @@ def update_instances_json():
     s3.download_file('www.ec2instances.info', 'instances.json', 'utils/instances.json')
 
 
-def build_regional_pricing(region):
+def build_regional_pricing():
     with open('utils/instances.json', 'r') as instances_json_file:
         instances_json = json.loads(instances_json_file.read())
     final_list = []
     for instance in instances_json:
+        instance_copy = copy.deepcopy(instance)
         try:
-            final_list.append({
-                    "name": instance['instance_type'],
-                    "memory": instance['memory'],
-                    "vcpus": instance["vCPU"],
-                    "price": instance['pricing'][region]['linux']['ondemand'],
-                    "arch": instance['arch'][0]
-                })
-        except KeyError as e:
-            print("WARNING  Cannot find {0} in region {1}".format(instance["instance_type"], region))
-    with open('instance_recommender/static/regions/{}'.format(region), 'w+') as region_file:
+            for region, prices in instance['pricing'].items():
+                print(prices.keys())
+                try:
+                    instance_copy['pricing'][region] = prices['linux']['ondemand']
+                except KeyError as e:
+                    print('Cannot parse linux pricing for instance {0} in region {1}'.format(instance['instance_type'], region))
+        except Exception  as e:
+            print('Cannot parse pricing for instance {0}'.format(instance['instance_type']))
+        final_list.append(instance_copy)
+    with open('instance_recommender/static/regions/all', 'w+') as region_file:
         region_file.write(json.dumps(final_list))
 
 
@@ -40,5 +41,5 @@ if __name__ == "__main__":
     if args.refresh:
         update_instances_json()
     
-    build_regional_pricing('us-east-1')
+    build_regional_pricing()
 
