@@ -11,8 +11,10 @@ argument_parser.add_argument('--min-vcpus', default=0, help='Minimum number of v
 argument_parser.add_argument('--memory', required=True, help='Total amount of memory needed in GB', type=int)
 argument_parser.add_argument('--max-memory', required=True, help='Maximum memory in GBs per instance', type=int)
 argument_parser.add_argument('--min-memory', default=0, help='Minimum memory in GBs per instance', type=int)
+argument_parser.add_argument('--exclude-burstable', action='store_true', default=False, help='Exclude instance types of burstable type: t2, t3, t3a, etc.')
 argument_parser.add_argument('--arch', default='x86_64', help='Architecture of instances in the group', type=str)
 argument_parser.add_argument('--region', default='us-east-1', help='Region for the instance', type=str)
+
 args = argument_parser.parse_args()
 output = best_reco(
     required_resources = {
@@ -28,6 +30,7 @@ output = best_reco(
             "min": args.min_memory,
             "max": args.max_memory
         },
+        "exclude_burstable": args.exclude_burstable,
         "arch": args.arch,
         "region": args.region
     }))
