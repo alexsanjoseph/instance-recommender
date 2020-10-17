@@ -18,6 +18,16 @@ pip install -r requirements.txt
 ```
  ./recommender --vcpus 8 --memory 16 --max-vcpus 3 --max-memory 8
 ```
+### UI
+
+Run streamlit UI using
+```
+ streamlit run streamlit.py
+```
+
+![Example UI](example_ui.png)
+
+
 
 ### Refresh instance list
 ```
