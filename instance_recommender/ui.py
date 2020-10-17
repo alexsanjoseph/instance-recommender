@@ -45,7 +45,7 @@ def run_streamlit_ui():
     selected_instances = selected_instances[selected_instances['name'].str.contains(instance_regex)]
 
     if selected_instances.shape[0] == 0:
-        st.markdown("**Error!!! No instances available matching the criteria. Please relax the constraints and try again**")
+        st.markdown("**Error! No instances found matching the criteria. Please relax the constraints and try again!**")
         st.stop()
 
     recommended_instances = best_reco(
