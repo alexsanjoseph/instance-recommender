@@ -14,8 +14,8 @@ def run_streamlit_ui():
 
     st.sidebar.markdown("# Required Resources")
 
-    vcpus = st.sidebar.number_input("# of cores", min_value=1)
-    memory = st.sidebar.number_input("Total RAM", min_value=1)
+    vcpus = st.sidebar.number_input("# of cores", min_value=1, value=100)
+    memory = st.sidebar.number_input("Total RAM", min_value=1, value=230)
 
     allowed_archs = ['x86_64', 'arm64', 'i386']
     arch = st.sidebar.selectbox("Select Architecture", allowed_archs)
@@ -43,8 +43,10 @@ def run_streamlit_ui():
             "region": region
         })
     selected_instances = selected_instances[selected_instances['name'].str.contains(instance_regex)]
-    st.markdown("## Filtered Instances Table")
-    st.dataframe(selected_instances)
+
+    if selected_instances.shape[0] == 0:
+        st.markdown("**Error!!! No instances available matching the criteria. Please relax the constraints and try again**")
+        st.stop()
 
     recommended_instances = best_reco(
         required_resources = {
@@ -58,4 +60,9 @@ def run_streamlit_ui():
 
     total_price = round(sum(recommended_instances['units'] * recommended_instances['price'].astype(float)), 3)
     st.markdown(f'**Total price for this setup: ${total_price}/hour**')
+
+    st.markdown("## Details")
+    st.markdown("#### Filtered Instances")
+    st.dataframe(selected_instances)
+
 
