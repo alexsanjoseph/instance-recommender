@@ -26,8 +26,8 @@ def run_streamlit_ui():
 
     st.sidebar.markdown("# Constraints")
 
-    min_vcpus, max_vcpus = st.sidebar.slider("Min/Max vCPUs for instance", value=(2, 64), min_value=1, max_value=128)
-    min_memory, max_memory = st.sidebar.slider("Min/Max memory for instance", value=(2, 64), min_value=1, max_value=128)
+    min_vcpus, max_vcpus = st.sidebar.slider("Min/Max vCPUs for instance", value=(2, 128), min_value=1, max_value=128)
+    min_memory, max_memory = st.sidebar.slider("Min/Max memory for instance", value=(2, 128), min_value=1, max_value=128)
 
     selected_instances = get_list_of_instances({
             "vcpus": {
