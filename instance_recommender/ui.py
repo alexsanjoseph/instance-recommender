@@ -55,12 +55,21 @@ def run_streamlit_ui():
         },
         instance_df=selected_instances)
 
-    st.markdown("## Recommended Instances")
+    total_price = round(sum(recommended_instances['units'] * recommended_instances['price']), 3)
+    total_vcpus = round(sum(recommended_instances['units'] * recommended_instances['vcpus']), 3)
+    total_mem = round(sum(recommended_instances['units'] * recommended_instances['memory']), 3)
+
+    # st.markdown(f'------------------------------------------------------------------------------')
+    st.markdown("## Recommendations")
+    st.markdown("### Configuration")
+    st.markdown(f'Total VCPUs: **{total_vcpus}**, Total Memory: **{total_mem} GB**')
+    st.markdown(f'Total price for this setup: **${total_price}/hour**, **${round(total_price * 720, 3)}/month**')
+
+    st.markdown("### Instances")
     st.dataframe(recommended_instances)
 
-    total_price = round(sum(recommended_instances['units'] * recommended_instances['price'].astype(float)), 3)
-    st.markdown(f'**Total price for this setup: ${total_price}/hour**')
-
+    st.markdown(f'------------------------------------------------------------------------------')
+    # st.markdown(f'==============================================================================')
     st.markdown("## Details")
     st.markdown("#### Filtered Instances")
     st.dataframe(selected_instances)
