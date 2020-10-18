@@ -4,7 +4,6 @@ import streamlit as st
 
 from instance_recommender.css import current_css
 from instance_recommender.recommender import best_reco
-from instance_recommender.instance_list import get_list_of_instances
 
 from instance_recommender.inventory import Inventory
 
@@ -67,11 +66,11 @@ def run_streamlit_ui(inventory_source_url):
 
     # st.markdown(f'------------------------------------------------------------------------------')
     st.markdown("## Recommendations")
-    st.markdown("### Configuration")
+    # st.markdown("#### Configuration")
     st.markdown(f'Total VCPUs: **{total_vcpus}**, Total Memory: **{total_mem} GB**')
     st.markdown(f'Total price for this setup: **${total_price}/hour**, **${round(total_price * 720, 3)}/month**')
 
-    st.markdown("### Instances")
+    st.markdown("#### Instances")
     st.dataframe(recommended_instances)
 
     st.markdown(f'------------------------------------------------------------------------------')
