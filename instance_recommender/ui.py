@@ -6,11 +6,17 @@ from instance_recommender.css import current_css
 from instance_recommender.recommender import best_reco
 from instance_recommender.instance_list import get_list_of_instances
 
+from instance_recommender.inventory import Inventory
 
-def run_streamlit_ui():
+
+def run_streamlit_ui(inventory_source_url):
+    
+    inventory = Inventory(source_url=inventory_source_url, refresh=True)
 
     st.markdown("# AWS Instance Recommender!")
     st.markdown(current_css, unsafe_allow_html=True)
+
+    region = st.sidebar.selectbox("region", inventory.get_available_regions())
 
     st.sidebar.markdown("# Required Resources")
 
@@ -19,7 +25,6 @@ def run_streamlit_ui():
 
     allowed_archs = ['x86_64', 'arm64', 'i386']
     arch = st.sidebar.selectbox("Select Architecture", allowed_archs)
-    region = st.sidebar.selectbox("Select Region", ['us-east-1'])
     exclude_burstable = st.sidebar.checkbox("Exclude Burstables?", value=True)
 
     instance_regex = st.sidebar.text_input("Filter Indices by Regex(optional)")
@@ -29,7 +34,8 @@ def run_streamlit_ui():
     min_vcpus, max_vcpus = st.sidebar.slider("Min/Max vCPUs for instance", value=(2, 128), min_value=1, max_value=128)
     min_memory, max_memory = st.sidebar.slider("Min/Max memory for instance", value=(2, 128), min_value=1, max_value=128)
 
-    selected_instances = get_list_of_instances({
+    selected_instances = inventory.get_pricing_with_constraints({
+            "region": "us-east-1",
             "vcpus": {
                 "min": min_vcpus,
                 "max": max_vcpus
