@@ -4,19 +4,62 @@ from .recommender import best_reco
 from .instance_list import get_list_of_instances
 from .inventory import Inventory
 
-argument_parser = argparse.ArgumentParser(description='Get instance recommendations for a distributed EC2 setup')
-argument_parser.add_argument('--vcpus', required=True, help='Total number of vcpus required', type=int)
-argument_parser.add_argument('--max-vcpus', required=True, help='Maximum number of vCPUs per instance', type=int)
-argument_parser.add_argument('--min-vcpus', default=0, help='Minimum number of vCPUs per instance', type=int)
-argument_parser.add_argument('--memory', required=True, help='Total amount of memory needed in GB', type=int)
-argument_parser.add_argument('--max-memory', required=True, help='Maximum memory in GBs per instance', type=int)
-argument_parser.add_argument('--min-memory', default=0, help='Minimum memory in GBs per instance', type=int)
-argument_parser.add_argument('--exclude-burstable', action='store_true', default=False, help='Exclude instance types of burstable type: t2, t3, t3a, etc.')
-argument_parser.add_argument('--arch', default='x86_64', help='Architecture of instances in the group', type=str)
-argument_parser.add_argument('--region', default='us-east-1', help='Region for the instance', type=str)
-argument_parser.add_argument('--refresh', default=False, action='store_true', help='Refresh local inventory cache')
-argument_parser.add_argument('--inventory-source', default='file://.inventory/instances.json', help='Inventory source')
-
+argument_parser = argparse.ArgumentParser(
+    description='Get instance recommendations for a distributed EC2 setup')
+argument_parser.add_argument(
+    '--vcpus',
+    required=True,
+    help='Total number of vcpus required',
+    type=int)
+argument_parser.add_argument(
+    '--max-vcpus',
+    required=True,
+    help='Maximum number of vCPUs per instance',
+    type=int)
+argument_parser.add_argument(
+    '--min-vcpus',
+    default=0,
+    help='Minimum number of vCPUs per instance',
+    type=int)
+argument_parser.add_argument(
+    '--memory',
+    required=True,
+    help='Total amount of memory needed in GB',
+    type=int)
+argument_parser.add_argument(
+    '--max-memory',
+    required=True,
+    help='Maximum memory in GBs per instance',
+    type=int)
+argument_parser.add_argument(
+    '--min-memory',
+    default=0,
+    help='Minimum memory in GBs per instance',
+    type=int)
+argument_parser.add_argument(
+    '--exclude-burstable',
+    action='store_true',
+    default=False,
+    help='Exclude instance types of burstable type: t2, t3, t3a, etc.')
+argument_parser.add_argument(
+    '--arch',
+    default='x86_64',
+    help='Architecture of instances in the group',
+    type=str)
+argument_parser.add_argument(
+    '--region',
+    default='us-east-1',
+    help='Region for the instance',
+    type=str)
+argument_parser.add_argument(
+    '--refresh',
+    default=False,
+    action='store_true',
+    help='Refresh local inventory cache')
+argument_parser.add_argument(
+    '--inventory-source',
+    default='file://.inventory/instances.json',
+    help='Inventory source')
 
 
 args = argument_parser.parse_args()
@@ -24,7 +67,7 @@ args = argument_parser.parse_args()
 inventory = Inventory(source_url=args.inventory_source, refresh=True)
 
 output = best_reco(
-    required_resources = {
+    required_resources={
         "memory": args.memory,
         "vcpus": args.vcpus
     },
