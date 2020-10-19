@@ -10,5 +10,7 @@
         "./tests",
         "-p",
         "test_*.py"
-    ]
+    ],
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true
 }

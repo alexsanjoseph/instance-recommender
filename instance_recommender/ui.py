@@ -9,7 +9,7 @@ from instance_recommender.inventory import Inventory
 
 
 def run_streamlit_ui(inventory_source_url):
-    
+
     inventory = Inventory(source_url=inventory_source_url, refresh=True)
 
     st.markdown("# AWS Instance Recommender!")
@@ -30,53 +30,60 @@ def run_streamlit_ui(inventory_source_url):
 
     st.sidebar.markdown("# Constraints")
 
-    min_vcpus, max_vcpus = st.sidebar.slider("Min/Max vCPUs for instance", value=(2, 128), min_value=1, max_value=128)
-    min_memory, max_memory = st.sidebar.slider("Min/Max memory for instance", value=(2, 128), min_value=1, max_value=128)
+    min_vcpus, max_vcpus = st.sidebar.slider(
+        "Min/Max vCPUs for instance", value=(2, 128), min_value=1, max_value=128)   # noqa
+    min_memory, max_memory = st.sidebar.slider(
+        "Min/Max memory for instance", value=(2, 128), min_value=1, max_value=128)  # noqa
 
     selected_instances = inventory.get_pricing_with_constraints({
-            "region": "us-east-1",
-            "vcpus": {
-                "min": min_vcpus,
-                "max": max_vcpus
-            },
-            "memory": {
-                "min": min_memory,
-                "max": max_memory
-            },
-            "exclude_burstable": exclude_burstable,
-            "arch": arch,
-            "region": region
-        })
-    selected_instances = selected_instances[selected_instances['name'].str.contains(instance_regex)]
+        "region": "us-east-1",
+        "vcpus": {
+            "min": min_vcpus,
+            "max": max_vcpus
+        },
+        "memory": {
+            "min": min_memory,
+            "max": max_memory
+        },
+        "exclude_burstable": exclude_burstable,
+        "arch": arch,
+        "region": region
+    })
+    selected_instances = selected_instances[selected_instances['name'].str.contains(instance_regex)]    # noqa
 
     if selected_instances.shape[0] == 0:
-        st.markdown("**Error! No instances found matching the criteria. Please relax the constraints and try again!**")
+        st.markdown(
+            "**Error! No instances found matching the criteria. Please relax the constraints and try again!**")  # noqa
         st.stop()
 
     recommended_instances = best_reco(
-        required_resources = {
+        required_resources={
             "memory": memory,
             "vcpus": vcpus
         },
         instance_df=selected_instances)
 
-    total_price = round(sum(recommended_instances['units'] * recommended_instances['price']), 3)
-    total_vcpus = round(sum(recommended_instances['units'] * recommended_instances['vcpus']), 3)
-    total_mem = round(sum(recommended_instances['units'] * recommended_instances['memory']), 3)
+    total_price = round(
+        sum(recommended_instances['units'] * recommended_instances['price']), 3)    # noqa
+    total_vcpus = round(
+        sum(recommended_instances['units'] * recommended_instances['vcpus']), 3)    # noqa
+    total_mem = round(
+        sum(recommended_instances['units'] * recommended_instances['memory']), 3)   # noqa
 
     # st.markdown(f'------------------------------------------------------------------------------')
     st.markdown("## Recommendations")
     # st.markdown("#### Configuration")
-    st.markdown(f'Total VCPUs: **{total_vcpus}**, Total Memory: **{total_mem} GB**')
-    st.markdown(f'Total price for this setup: **${total_price}/hour**, **${round(total_price * 720, 3)}/month**')
+    st.markdown(
+        f'Total VCPUs: **{total_vcpus}**, Total Memory: **{total_mem} GB**')
+    st.markdown(
+        f'Total price for this setup: **${total_price}/hour**, **${round(total_price * 720, 3)}/month**')   # noqa
 
     st.markdown("#### Instances")
     st.dataframe(recommended_instances)
 
-    st.markdown(f'------------------------------------------------------------------------------')
+    st.markdown(
+        f'------------------------------------------------------------------------------')      # noqa
     # st.markdown(f'==============================================================================')
     st.markdown("## Details")
     st.markdown("#### Filtered Instances")
     st.dataframe(selected_instances)
-
-
