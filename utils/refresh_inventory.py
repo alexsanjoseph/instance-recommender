@@ -59,4 +59,4 @@ if __name__ == "__main__":
     args = argparser.parse_args()
     build_pricing_inventory(dest='inventory/instances.json',
                             excluded_regions=['cn-north-1', 'cn-northwest-1'],
-                            refresh=args.refresh)
+                            refresh=args.download)
