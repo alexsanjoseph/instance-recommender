@@ -48,7 +48,7 @@ jobs:
 
         # The flag used on the pull strategy
         # Default: '--no-rebase'
-        pull_strategy: '--rebase'
+        pull_strategy: '--no-rebase'
 
         # Whether to push the commit and, if any, its tags to the repo (only `true` and `false` are accepted)
         # Default: true
