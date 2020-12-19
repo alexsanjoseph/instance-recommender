@@ -40,10 +40,6 @@ jobs:
         # Default: author of the commit that triggered the run
         author_name: TuxieDev
 
-        # The email of the user that will be displayed as the author of the commit
-        # Default: author of the commit that triggered the run
-        author_email: tuxiedev@gmail.com
-
         message: 'Update inventory'
 
         # The flag used on the pull strategy
