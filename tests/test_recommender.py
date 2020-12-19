@@ -18,7 +18,11 @@ class TestRecommender(TestCase):
         actual = best_reco(required_resources, instance_df)
 
         expected = pd.DataFrame({
-            'name': ['c5'], 'units': 9.0, 'vcpus': 2, 'memory': 4, 'price': 85
+            'name': ['c5'],
+            'units': 9.0,
+            'vcpus': 2,
+            'memory': 4,
+            'price': 85
         })
 
         assert actual.equals(expected)

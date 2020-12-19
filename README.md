@@ -14,10 +14,6 @@ source .env/bin/activate
 ```
 pip install -r requirements.txt
 ```
-* Get recommendations
-```
- ./recommender --vcpus 8 --memory 16 --max-vcpus 3 --max-memory 8
-```
 ### UI
 
 Run streamlit UI using
