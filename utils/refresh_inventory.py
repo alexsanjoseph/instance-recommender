@@ -51,12 +51,12 @@ def build_pricing_inventory(dest,
 if __name__ == "__main__":
     import argparse
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--refresh',
-                           '-r',
+    argparser.add_argument('--download',
+                           '-d',
                            action='store_true',
-                           default=False,
+                           default=True,
                            help='Download new inventory')
     args = argparser.parse_args()
     build_pricing_inventory(dest='inventory/instances.json',
                             excluded_regions=['cn-north-1', 'cn-northwest-1'],
-                            refresh=args.refresh)
+                            refresh=args.download)
