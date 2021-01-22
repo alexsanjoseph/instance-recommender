@@ -842,10 +842,16 @@
     "pricing": {
       "ap-northeast-1": "0.0108",
       "ap-south-1": "0.0056",
+      "ap-southeast-1": "0.0106",
+      "ap-southeast-2": "0.0106",
+      "ca-central-1": "0.0092",
       "eu-central-1": "0.0096",
       "eu-west-1": "0.0092",
+      "eu-west-2": "0.0094",
+      "sa-east-1": "0.0134",
       "us-east-1": "0.0084",
       "us-east-2": "0.0084",
+      "us-west-1": "0.01",
       "us-west-2": "0.0084"
     }
   },
@@ -4623,10 +4629,16 @@
     "pricing": {
       "ap-northeast-1": "0.0864",
       "ap-south-1": "0.0448",
+      "ap-southeast-1": "0.0848",
+      "ap-southeast-2": "0.0848",
+      "ca-central-1": "0.0736",
       "eu-central-1": "0.0768",
       "eu-west-1": "0.0736",
+      "eu-west-2": "0.0752",
+      "sa-east-1": "0.1072",
       "us-east-1": "0.0672",
       "us-east-2": "0.0672",
+      "us-west-1": "0.08",
       "us-west-2": "0.0672"
     }
   },
@@ -5621,10 +5633,16 @@
     "pricing": {
       "ap-northeast-1": "0.0216",
       "ap-south-1": "0.0112",
+      "ap-southeast-1": "0.0212",
+      "ap-southeast-2": "0.0212",
+      "ca-central-1": "0.0184",
       "eu-central-1": "0.0192",
       "eu-west-1": "0.0184",
+      "eu-west-2": "0.0188",
+      "sa-east-1": "0.0268",
       "us-east-1": "0.0168",
       "us-east-2": "0.0168",
+      "us-west-1": "0.02",
       "us-west-2": "0.0168"
     }
   },
@@ -7758,6 +7776,7 @@
     "memory": 1152.0,
     "arch": "x86_64",
     "pricing": {
+      "eu-west-1": "35.39655",
       "us-east-1": "32.7726",
       "us-west-2": "32.7726"
     }
@@ -7872,10 +7891,16 @@
     "pricing": {
       "ap-northeast-1": "0.3456",
       "ap-south-1": "0.1792",
+      "ap-southeast-1": "0.3392",
+      "ap-southeast-2": "0.3392",
+      "ca-central-1": "0.2944",
       "eu-central-1": "0.3072",
       "eu-west-1": "0.2944",
+      "eu-west-2": "0.3008",
+      "sa-east-1": "0.4288",
       "us-east-1": "0.2688",
       "us-east-2": "0.2688",
+      "us-west-1": "0.32",
       "us-west-2": "0.2688"
     }
   },
@@ -8081,10 +8106,16 @@
     "pricing": {
       "ap-northeast-1": "0.1728",
       "ap-south-1": "0.0896",
+      "ap-southeast-1": "0.1696",
+      "ap-southeast-2": "0.1696",
+      "ca-central-1": "0.1472",
       "eu-central-1": "0.1536",
       "eu-west-1": "0.1472",
+      "eu-west-2": "0.1504",
+      "sa-east-1": "0.2144",
       "us-east-1": "0.1344",
       "us-east-2": "0.1344",
+      "us-west-1": "0.16",
       "us-west-2": "0.1344"
     }
   },
@@ -8128,10 +8159,16 @@
     "pricing": {
       "ap-northeast-1": "0.0432",
       "ap-south-1": "0.0224",
+      "ap-southeast-1": "0.0424",
+      "ap-southeast-2": "0.0424",
+      "ca-central-1": "0.0368",
       "eu-central-1": "0.0384",
       "eu-west-1": "0.0368",
+      "eu-west-2": "0.0376",
+      "sa-east-1": "0.0536",
       "us-east-1": "0.0336",
       "us-east-2": "0.0336",
+      "us-west-1": "0.04",
       "us-west-2": "0.0336"
     }
   },
@@ -8155,10 +8192,16 @@
     "pricing": {
       "ap-northeast-1": "0.0054",
       "ap-south-1": "0.0028",
+      "ap-southeast-1": "0.0053",
+      "ap-southeast-2": "0.0053",
+      "ca-central-1": "0.0046",
       "eu-central-1": "0.0048",
       "eu-west-1": "0.0046",
+      "eu-west-2": "0.0047",
+      "sa-east-1": "0.0067",
       "us-east-1": "0.0042",
       "us-east-2": "0.0042",
+      "us-west-1": "0.005",
       "us-west-2": "0.0042"
     }
   },
